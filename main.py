@@ -70,7 +70,6 @@ novos_dados = novos_dados.drop(
 probabilidade_novos_dados = (modelo_principal.predict_proba(novos_dados)[
     :, 1]*100).round(2)
 
-
 # criando uma coluna de probabilidades de ter parkinson
 previsao_final['probabilidade'] = probabilidade_novos_dados
 

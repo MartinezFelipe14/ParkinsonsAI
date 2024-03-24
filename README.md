@@ -1,4 +1,7 @@
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Esse projeto foi desenvolvido por Felipe R. Martinez com base nos estudos citados abaixo. Redes Sociais: [GitHub](https://github.com/MartinezFelipe14) / [LinkedIn](https://www.linkedin.com/in/felipe-martinez-957762293)
+
+------------------------------------------------------------------------------------------------------------------------
 
 Este projeto utiliza um modelo de IA para calcular a probabilidade de uma pessoa ter Parkinson, com base em um conjunto de dados disponibilizado pelo UC Irvine Machine Learning Repository. O modelo foi inspirado nas pesquisas conduzidas por Max A. Little, Patrick E. McSharry, Eric J. Hunter, Lorraine O. Ramig e outros, conforme documentado nos seguintes artigos:
 
@@ -7,31 +10,20 @@ Este projeto utiliza um modelo de IA para calcular a probabilidade de uma pessoa
 
 Esses estudos foram fundamentais para o desenvolvimento do modelo de IA, que utiliza medições de voz para identificar características associadas ao Parkinson. O objetivo deste projeto é fornecer uma ferramenta útil para ajudar na detecção precoce e no monitoramento da progressão da doença.
 
--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+Informações sobre os indicadores:
 
-name: identificador para cada registro, como o nome ou um código identificador.
-MDVP:Fo(Hz): Frequência fundamental, medida em Hertz (Hz), que é a frequência mais baixa de um som complexo, geralmente associada à voz.
-MDVP:Fhi(Hz): Frequência máxima medida em Hertz (Hz).
-MDVP:Flo(Hz): Frequência mínima medida em Hertz (Hz).
-MDVP:Jitter(%): Uma medida de flutuação na frequência fundamental da voz, geralmente relacionada à instabilidade na produção vocal.
-MDVP:Jitter(Abs): Uma medida absoluta de flutuação na frequência fundamental.
-MDVP:RAP: Uma medida do ciclo de flutuação na frequência fundamental, similar ao Jitter.
-MDVP:PPQ: Outra medida de flutuação na frequência fundamental.
-Jitter:DDP: Uma medida derivada do Jitter, geralmente é o dobro do valor do Jitter RAP.
-MDVP:Shimmer: Uma medida da variação na amplitude da onda sonora da voz.
-MDVP:Shimmer(dB): Uma medida em decibéis da variação na amplitude da onda sonora.
-Shimmer:APQ3: Uma medida de variação na amplitude da onda sonora usando o valor dos primeiros três quartis.
-Shimmer:APQ5: Uma medida de variação na amplitude da onda sonora usando o valor dos primeiros cinco quartis.
-MDVP:APQ: Outra medida de variação na amplitude da onda sonora.
-Shimmer:DDA: Uma medida derivada do Shimmer, calculada pela diferença entre os valores dos quartis.
-NHR: Razão de ruído harmônico, uma medida de ruído na voz em relação ao sinal harmônico.
-HNR: Relação sinal-ruído harmônico, uma medida global de qualidade do sinal vocal.
-status: Uma variável que indica o status do paciente, que pode ser relevante para o diagnóstico ou classificação.
-RPDE: Dimensão de entropia de recorrência, uma medida da complexidade da voz.
-DFA: Análise fractal de flutuação, outra medida de complexidade da voz.
-spread1: Um parâmetro acústico derivado da análise de distúrbios vocais.
-spread2: Outro parâmetro acústico derivado da análise de distúrbios vocais.
-D2: Dimensão fractal, uma medida da complexidade da voz baseada em geometria fractal.
-PPE: Entropia de perturbação de pitch, uma medida da variabilidade na frequência fundamental da voz.
+subject#: Um número inteiro que identifica exclusivamente cada sujeito ou participante do estudo.
+age: Idade do sujeito.
+sex: Gênero do sujeito, onde '0' pode representar masculino e '1' pode representar feminino.
+test_time: Tempo desde o recrutamento para o estudo, onde a parte inteira representa o número de dias desde o recrutamento.
+Jitter(%), Jitter(Abs), Jitter:DDP: Diversas medidas de variação na frequência fundamental da voz.
+Shimmer, Shimmer(dB), Shimmer:APQ3, Shimmer:APQ5, Shimmer:DDA: Diversas medidas de variação na amplitude da voz.
+NHR, HNR: Duas medidas da relação entre ruído e componentes tonais na voz.
+RPDE: Uma medida de complexidade dinâmica não linear.
+DFA: Exponente de escala fractal do sinal.
+PPE: Uma medida não linear de variação na frequência fundamental.
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------
+
+Este trabalho está licenciado sob uma Licença Creative Commons Atribuição-NãoComercial-CompartilhaIgual 4.0 Internacional. Para ver uma cópia desta licença, visite http://creativecommons.org/licenses/by-nc-sa/4.0/ ou envie uma carta para Creative Commons, PO Box 1866, Mountain View, CA 94042, USA.
