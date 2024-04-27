@@ -3,7 +3,7 @@ Esse projeto foi desenvolvido por Felipe R. Martinez com base nos estudos citado
 
 ------------------------------------------------------------------------------------------------------------------------
 
-Este projeto utiliza um modelo de IA para calcular a probabilidade de uma pessoa ter Parkinson, com base em um conjunto de dados disponibilizado pelo UC Irvine Machine Learning Repository. O modelo foi inspirado nas pesquisas conduzidas por Max A. Little, Patrick E. McSharry, Eric J. Hunter, Lorraine O. Ramig e outros, conforme documentado nos seguintes artigos:
+Este projeto utiliza um modelo de Inteligência Artificial com aprendizado supervisionado para calcular a probabilidade de uma pessoa ter Parkinson, com base em um conjunto de dados disponibilizado pelo UC Irvine Machine Learning Repository. O modelo foi inspirado nas pesquisas conduzidas por Max A. Little, Patrick E. McSharry, Eric J. Hunter, Lorraine O. Ramig e outros, conforme documentado nos seguintes artigos:
 
 - 'Exploiting Nonlinear Recurrence and Fractal Scaling Properties for Voice Disorder Detection', Little MA, McSharry PE, Roberts SJ, Costello DAE, Moroz IM. BioMedical Engineering OnLine 2007, 6:23 (26 June 2007)
 - A Tsanas, MA Little, PE McSharry, LO Ramig (2009) 'Accurate telemonitoring of Parkinson.s disease progression by non-invasive speech tests', IEEE Transactions on Biomedical Engineering.
