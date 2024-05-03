@@ -1,7 +1,7 @@
 from sklearn.ensemble import GradientBoostingClassifier
 import pandas as pd
 import os
-import preprocessing
+from . import preprocessing
 
 
 class Model:
