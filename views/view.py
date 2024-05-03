@@ -11,7 +11,8 @@ def view_model(modelo_principal, X_teste, y_teste):
     print(previsao_modelo_principal)
 
     # criar uma matriz de confusão
-    matriz_confusao = confusion_matrix(y_teste, previsao_modelo_principal)
+    matriz_confusao = confusion_matrix(
+        y_teste, previsao_modelo_principal)
 
     # plotar um gráfico com os (TP, FP, TN, FN)
     sns.heatmap(matriz_confusao, annot=True, fmt='d',

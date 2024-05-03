@@ -1,11 +1,11 @@
-from views import view
 from models import model
+from views import view
 
 
 class Controller:
-    def __init__(self, view=False):
+    def __init__(self):
         self.model = model.Model()
-        self.view = view
+        self.view = view.View(self.model.modelo)
 
     def preprocess_and_training(self):
         self.model.preprocess()
@@ -23,6 +23,6 @@ class Controller:
 
 
 if __name__ == '__main__':
-    my_controller = Controller(view=True)
+    my_controller = Controller()
     my_controller.preprocess_and_training()
     my_controller.calcular_e_salvar()
