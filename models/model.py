@@ -17,6 +17,7 @@ class Model:
         self.X_teste = None
         self.y_treino = None
         self.y_teste = None
+        # define o modelo
         self.modelo = GradientBoostingClassifier(
             learning_rate=0.1, n_estimators=50, max_depth=3)
         self.novos_dados = None
@@ -24,6 +25,7 @@ class Model:
         self.probabilidade_novos_dados = None
 
     def preprocess(self):
+        # préprocessa os dados e os separa em treino e teste
         self.X_treino, self.X_teste, self.y_treino, self.y_teste = preprocessing.preprocess(
             self.caminho_dataset)
 
@@ -47,12 +49,3 @@ class Model:
     def salvar_dataset(self):
         # salvar o novo df
         self.previsao_final.to_csv('parkinsons_predict.csv', index=False)
-
-
-if __name__ == '__main__':
-    modelo = Model()
-    modelo.preprocess()
-    modelo.treinar_modelo()
-    modelo.tratar_dataset()
-    modelo.calcular_probabilidade()
-    modelo.salvar_dataset()

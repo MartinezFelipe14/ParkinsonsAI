@@ -7,7 +7,7 @@ def preprocess(caminho_dataset):
     # carregar a base de dados e colocar na variável df
     df = pd.read_csv(caminho_dataset)
 
-    # colocar as outras colunas para prever o y
+    # colocar as outras colunas para prever o y excluindo colunas que não tem no dataset final
     X = df.drop(['status', 'name', 'APQ', 'D2',
                 'Fhi(Hz)', 'Flo(Hz)', 'Fo(Hz)',
                  'PPQ', 'RAP', 'spread1', 'spread2'], axis=1)
@@ -18,6 +18,7 @@ def preprocess(caminho_dataset):
     X_treino, X_teste, y_treino, y_teste = train_test_split(
         X, y, test_size=0.2)
 
+    # aplicando Standard Scaler para uma representação Gaussiana
     sc = StandardScaler()
     sc.fit(X_treino)
     X_treino = sc.transform(X_treino.values)
@@ -30,6 +31,7 @@ def preprocess_new_data(caminho_novo_dataset):
 
     novos_dados = pd.read_csv(caminho_novo_dataset)
 
+    # separando os dados subject e outros para a tabela final
     previsao_final = novos_dados[[
         'subject#', 'age', 'sex', 'test_time']]
 
@@ -38,6 +40,7 @@ def preprocess_new_data(caminho_novo_dataset):
         ['subject#', 'age', 'sex', 'test_time', 'motor_UPDRS', 'total_UPDRS', 'Jitter:PPQ5',
             'Jitter:RAP', 'Shimmer:APQ11'], axis=1)
 
+    # aplicando Standard Scaler nos dados da previsão
     sc = StandardScaler()
     sc.fit(novos_dados)
     novos_dados = sc.transform(novos_dados.values)
