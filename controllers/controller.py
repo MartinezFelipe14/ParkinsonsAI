@@ -5,7 +5,6 @@ from views import view
 class Controller:
     def __init__(self):
         self.model = model.Model()
-        self.view = view.View(self.model.modelo)
 
     def preprocess_and_training(self):
         self.model.preprocess()
@@ -17,9 +16,9 @@ class Controller:
         self.model.salvar_dataset()
 
     def view_model(self):
-        if self.view:
-            self.view.view_model(
-                self.model.modelo, self.model.X_teste, self.model.y_teste)
+        # plota o modelo com a função do arquivo view
+        view.view_model(self.model.modelo, self.model.X_teste,
+                        self.model.y_teste)
 
 
 if __name__ == '__main__':
