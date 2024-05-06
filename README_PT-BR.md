@@ -1,5 +1,5 @@
 
-Esse projeto foi desenvolvido por Felipe R. Martinez com base nos estudos citados abaixo. Redes Sociais: [GitHub](https://github.com/MartinezFelipe14) / [LinkedIn](https://www.linkedin.com/in/felipe-martinez-957762293)
+Esse projeto foi desenvolvido por Felipe R. Martinez com base nos estudos citados abaixo. Redes Sociais: [GitHub](https://github.com/MartinezFelipe14) / [LinkedIn](https://www.linkedin.com/in/martinezfelipe14/)
 
 ------------------------------------------------------------------------------------------------------------------------
 
@@ -15,7 +15,7 @@ Informações sobre os indicadores:
 
 subject#: Um número inteiro que identifica exclusivamente cada sujeito ou participante do estudo.
 age: Idade do sujeito.
-sex: Gênero do sujeito, onde '0' pode representar masculino e '1' pode representar feminino.
+sex: Gênero do sujeito, onde '0' representa masculino e '1' representa feminino.
 test_time: Tempo desde o recrutamento para o estudo, onde a parte inteira representa o número de dias desde o recrutamento.
 Jitter(%), Jitter(Abs), Jitter:DDP: Diversas medidas de variação na frequência fundamental da voz.
 Shimmer, Shimmer(dB), Shimmer:APQ3, Shimmer:APQ5, Shimmer:DDA: Diversas medidas de variação na amplitude da voz.
