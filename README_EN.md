@@ -1,5 +1,5 @@
 
-This project was developed by Felipe R. Martinez based on this researchs mentioned below. Social Networks: [GitHub](https://github.com/MartinezFelipe14) / [LinkedIn](https://www.linkedin.com/in/martinezfelipe14/)
+This project was developed by Felipe R. Martinez based on the research projects mentioned below. Social Networks: [GitHub](https://github.com/MartinezFelipe14) / [LinkedIn](https://www.linkedin.com/in/martinezfelipe14/)
 
 ------------------------------------------------------------------------------------------------------------------------
 
