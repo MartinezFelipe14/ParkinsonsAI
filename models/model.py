@@ -1,8 +1,6 @@
 from sklearn.ensemble import GradientBoostingClassifier
-import pandas as pd
 import os
 from . import preprocessing
-from views import view
 
 
 class Model:
