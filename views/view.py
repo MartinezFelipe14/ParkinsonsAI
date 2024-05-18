@@ -3,12 +3,9 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
-def view_model(modelo_principal, X_teste, y_teste):
+def view_model(pipe, X_teste, y_teste):
     # fazer uma previsão do modelo a fins de teste
-    previsao_modelo_principal = modelo_principal.predict(X_teste)
-
-    # testar a previsão do modelo
-    print(previsao_modelo_principal)
+    previsao_modelo_principal = pipe.predict(X_teste)
 
     # criar uma matriz de confusão
     matriz_confusao = confusion_matrix(
