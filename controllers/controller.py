@@ -13,9 +13,10 @@ class Controller:
     def calcular_e_salvar(self):
         self.model.tratar_dataset()
         self.model.calcular_probabilidade()
+        self.model.calcular_resultado()
         self.model.salvar_dataset()
 
     def view_model(self):
         # plota o modelo com a função do arquivo view
-        view.view_model(self.model.modelo, self.model.X_teste,
+        view.view_model(self.model.pipe, self.model.X_teste,
                         self.model.y_teste)
