@@ -1,13 +1,15 @@
-from sklearn.model_selection import GridSearchCV
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from skopt import gp_minimize
+from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
+from xgboost import XGBClassifier
 import pandas as pd
 import os
 
 # Carregar base de dados
-caminho_dataset = os.path.join(os.path.dirname(
-    __file__), 'datasets', 'parkinsons.data')
+diretorio_atual = os.getcwd()
+
+caminho_dataset = os.path.join(diretorio_atual, 'datasets', 'parkinsons.data')
+
 df = pd.read_csv(caminho_dataset)
 
 X = df.drop(['status', 'name', 'APQ', 'D2',
@@ -18,56 +20,40 @@ y = df['status']
 
 X_treino, X_teste, y_treino, y_teste = train_test_split(X, y, test_size=0.2)
 
-# Definir os classificadores e os seus parâmetros obs: poderia também ser usado uma Pipeline
-classificadores = [
-    DecisionTreeClassifier(),
-    RandomForestClassifier(),
-    GradientBoostingClassifier()]
-parametros = [
-    # Parâmetros para DecisionTreeClassifier
-    {'max_depth': [None, 5, 10, 20, 50]},
-    # Parâmetros para RandomForestClassifier
-    {'n_estimators': [50, 100, 200]},
-    # Parâmetros para GradientBoostingClassifier
-    {'n_estimators': [50, 100, 200], 'learning_rate': [
-        0.01, 0.1, 0.5]}
-]
-# Listas para armazenar os melhores resultados para cada classificador
-melhores_parametros = []
-melhor_pontuacao = []
-teste_precisao = []
 
-# Loop sobre os classificadores
-for classificador, parametro in zip(classificadores, parametros):
-    # Criar o objeto GridSearchCV
-    grid_search = GridSearchCV(classificador, parametro, cv=5)
+def treinar_modelo(params):
+    learning_rate = params[0]
+    min_child_weight = params[1]
+    max_depth = params[2]
+    colsample_bytree = params[3]
+    gamma = params[4]
+    scale_pos_weight = params[5]
 
-    # Ajustar o objeto GridSearchCV aos dados de treinamento
-    grid_search.fit(X_treino, y_treino)
+    print(params, '\n')
 
-    # Melhores parâmetros encontrados
-    melhores_parametros.append(grid_search.best_params_)
+    modelo = XGBClassifier(learning_rate=learning_rate, min_child_weight=min_child_weight,
+                           max_depth=max_depth, colsample_bytree=colsample_bytree,
+                           gamma=gamma, scale_pos_weight=scale_pos_weight, n_estimators=50)  # número de arvores é definido como fixo
+    modelo.fit(X_treino, y_treino)
 
-    # Melhor pontuação no conjunto de validação cruzada
-    melhor_pontuacao.append(grid_search.best_score_)
+    proba = modelo.predict_proba(X_teste)[:, 1]
 
-    # Avaliar o desempenho no conjunto de teste
-    teste_precisao.append(grid_search.score(X_teste, y_teste))
+    # multiplicado por -1 porque é preciso minimizar a negativa do auc não o próprio auc
+    return -1 * roc_auc_score(y_teste, proba)
 
 
-# Imprimir resultados para cada classificador
-for i, classificador in enumerate(classificadores):
-    print(f"\n  Classificador: {classificador.__class__.__name__}")
-    print(f"Melhores parâmetros: {melhores_parametros[i]}")
-    print(f"Melhor pontuação: {melhor_pontuacao[i]}")
-    print(f"Acurácia no conjunto de teste: {teste_precisao[i]}")
+space = [(1e-3, 1, 'log-uniform'),  # learning_rate, log-uniform dá mais importância para números menores
+         (1, 10),  # min_child_weight
+         (3, 10),  # max_depth
+         (0.5, 1.0),  # colsample_bytree
+         (0, 5),  # gamma
+         (1, 10)]  # scale_pos_weight
 
-print(f"\n  O melhor estimator foi: {grid_search.best_estimator_}")
+# resultado = dummy_minimize(treinar_modelo, space, random_state=1, verbose=1, n_calls=30)
+# resultado.x
 
 
-'''
-após diversos testes, 
-é possível concluir que:
-GradientBoostingClassifier(learning_rate=0.1, n_estimators=50)
-foi o que obteve maior pontuação e acurácia nos testes.
- '''
+resultados_gp = gp_minimize(treinar_modelo, space,
+                            verbose=1, n_calls=30, n_random_starts=10)
+
+print(resultados_gp.x)
