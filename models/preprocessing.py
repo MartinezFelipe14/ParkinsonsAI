@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import GradientBoostingClassifier
+from xgboost import XGBClassifier
 
 
 def preprocess(caminho_dataset):
@@ -23,7 +23,9 @@ def preprocess(caminho_dataset):
     # definir os processos a serem feitos nos dados
     pipe = Pipeline(steps=[('StandardScaler', StandardScaler()),
                            ('MinMaxScaler', MinMaxScaler()),
-                           ('GradientBoostingClassifier', GradientBoostingClassifier(learning_rate=0.1, n_estimators=50))])  # max_depth padrão foi o que convergiu melhor
+                           ('XGBClassifier', XGBClassifier(learning_rate=0.1, n_estimators=50, max_depth=3,
+                                                           min_child_weight=1, colsample_bytree=0.5,
+                                                           scale_pos_weight=4))])  # gamma = 0
 
     return pipe, X_treino, X_teste, y_treino, y_teste
 

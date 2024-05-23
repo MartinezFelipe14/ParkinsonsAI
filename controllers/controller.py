@@ -16,7 +16,7 @@ class Controller:
         self.model.calcular_resultado()
         self.model.salvar_dataset()
 
-    def view_model(self):
+    def view_model(self, scatter=True, matrix=True):
         # plota o modelo com a função do arquivo view
         view.view_model(self.model.pipe, self.model.X_teste,
-                        self.model.y_teste)
+                        self.model.y_teste, scatter=scatter, matrix=matrix)
