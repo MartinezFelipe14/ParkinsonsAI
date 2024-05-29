@@ -2,6 +2,8 @@ from skopt import gp_minimize
 from sklearn.metrics import roc_auc_score
 from sklearn.model_selection import train_test_split
 from xgboost import XGBClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import pandas as pd
 import os
 
@@ -31,12 +33,15 @@ def treinar_modelo(params):
 
     print(params, '\n')
 
-    modelo = XGBClassifier(learning_rate=learning_rate, min_child_weight=min_child_weight,
-                           max_depth=max_depth, colsample_bytree=colsample_bytree,
-                           gamma=gamma, scale_pos_weight=scale_pos_weight, n_estimators=50)  # número de arvores é definido como fixo
-    modelo.fit(X_treino, y_treino)
+    pipe = Pipeline(steps=[('StandardScaler', StandardScaler()),
+                           ('MinMaxScaler', MinMaxScaler()),
+                           ('XGBClassifier', XGBClassifier(learning_rate=learning_rate, min_child_weight=min_child_weight,
+                                                           max_depth=max_depth, colsample_bytree=colsample_bytree,
+                                                           gamma=gamma, scale_pos_weight=scale_pos_weight, n_estimators=50))])  # número de arvores é definido como fixo, no caso igual a 50
 
-    proba = modelo.predict_proba(X_teste)[:, 1]
+    pipe.fit(X_treino, y_treino)
+
+    proba = pipe.predict_proba(X_teste)[:, 1]
 
     # multiplicado por -1 porque é preciso minimizar a negativa do auc não o próprio auc
     return -1 * roc_auc_score(y_teste, proba)
@@ -54,6 +59,6 @@ space = [(1e-3, 1, 'log-uniform'),  # learning_rate, log-uniform dá mais import
 
 
 resultados_gp = gp_minimize(treinar_modelo, space,
-                            verbose=1, n_calls=30, n_random_starts=10)
+                            verbose=1, n_calls=50, n_random_starts=10)
 
-print(resultados_gp.x)
+print(f'resultado: {resultados_gp.x}')

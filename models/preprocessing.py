@@ -23,9 +23,15 @@ def preprocess(caminho_dataset):
     # definir os processos a serem feitos nos dados
     pipe = Pipeline(steps=[('StandardScaler', StandardScaler()),
                            ('MinMaxScaler', MinMaxScaler()),
-                           ('XGBClassifier', XGBClassifier(learning_rate=0.1, n_estimators=50, max_depth=3,
-                                                           min_child_weight=1, colsample_bytree=0.5,
-                                                           scale_pos_weight=4))])  # gamma = 0
+                           ('XGBClassifier', XGBClassifier(learning_rate=0.18740935969636607, min_child_weight=5, n_estimators=50,
+                                                           max_depth=3, colsample_bytree=1.0, gamma=1.0, scale_pos_weight=7))])
+
+    '''
+    resultados da otimização de hiperparâmetros bayesiana com n_estimators=50:
+    learning_rate, min_child_weight, max_depth, colsample_bytree,
+    gamma, scale_pos_weight, n_estimators=50
+    [0.18740935969636607, 5, 3, 1.0, 0, 7]
+    '''
 
     return pipe, X_treino, X_teste, y_treino, y_teste
 
